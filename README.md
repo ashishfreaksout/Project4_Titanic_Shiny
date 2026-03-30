@@ -1,4 +1,4 @@
-# Project 4: Titanic Survival Prediction Dashboard
+# Project : Titanic Survival Prediction Dashboard
 
 This repository contains a full Shiny web application built using the R `shiny`, `tidymodels`, and `tidyverse` frameworks. The dashboard interactively trains, evaluates, and compares multiple machine learning models to predict passenger survival on the Titanic dataset, allowing the user to make real-time predictions for custom passengers.
 
