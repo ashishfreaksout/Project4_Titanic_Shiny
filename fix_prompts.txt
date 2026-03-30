@@ -1,0 +1,41 @@
+Project 4: Fix and Improvement Prompts
+
+App Debugging Prompts
+---------------------
+[PASTE PROMPT HERE if you have specific copy/pasted error messages sent to the AI]
+
+Prompt used to refine robust execution and validate UI:
+"Now improve the Shiny app code:
+- reduce duplication by creating helper functions
+- make the UI cleaner with sidebar controls
+- ensure the app does not retrain all models on startup
+- add validation messages for prediction inputs
+- make the code robust if one model fails
+- keep the app in one file and fully runnable"
+
+
+Report Refinement Prompts
+-------------------------
+Prompt to refine text and tone:
+"Revise the report.qmd you generated.
+
+Make these improvements:
+- Make the tone sound more natural and less AI-generated.
+- Keep it formal but student-like.
+- Add stronger interpretation of the model comparison results.
+- Emphasize that Random Forest tied for best accuracy but had the highest ROC AUC.
+- Make the implications section more thoughtful and specific to Titanic survival patterns.
+- Keep everything in valid Quarto format.
+- Return the full revised report.qmd only."
+
+Prompt to revise Agentic Tool description:
+"Write a polished report section titled 'Use of Agentic Programming Tool' for my Titanic Shiny app project.
+
+Requirements:
+- Explain that I used Google Antigravity as an agentic programming tool.
+- Explain that I provided a natural-language prompt describing the Shiny app requirements.
+- Explain that Antigravity generated the initial app structure and server logic.
+- Explain that I tested the generated code in RStudio and corrected errors.
+- Keep the writing honest, professional, and not exaggerated.
+- Make it sound like a student report, not marketing.
+- Return only the section text, not the whole report."

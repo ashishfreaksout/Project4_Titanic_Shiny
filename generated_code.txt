@@ -1,0 +1,12 @@
+Project 4: Summary of Generated Code
+
+For this assignment, the Google Antigravity tool generated the vast majority of the boilerplate code and structure for the Shiny application (app.R) and the core report structure (report.qmd). 
+
+Specifically, the agent was responsible for:
+- Constructing the initial Shiny app framework and the functional UI layout, structuring it cleanly with a sidebar and distinct output tabs.
+- Writing the reactive server logic to strictly link user inputs.
+- Translating the tidymodels definitions into an isolated workflow set that tracks the training across six different model engines (Null, kNN, Random Forest, C5.0, Logistic Regression, Naive Bayes).
+- Generating the comparison code tracking evaluating metrics, identifying the best-model natively, and creating instructions to plot the confusion matrix and ROC curves.
+- Building the new passenger prediction pipeline to properly validate inputs and feed into the refined Random Forest model prediction.
+
+While the agent provided a very strong initial draft and structural foundation, the generated code acts as scaffolding which was heavily reviewed and tested locally in RStudio. During testing, I caught and corrected elements to ensure the app met all usability requirements—such as establishing robust error handling mapping to prevent a single model crash from taking down the entire dashboard, verifying that UI notifications fired properly on invalid predictions, and ensuring no early preprocessing choked the startup speed. Through this workflow of generation, local testing, and deliberate correction, the final codebase represents a polished version that fully satisfies the assignment context.

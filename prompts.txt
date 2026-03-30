@@ -1,0 +1,93 @@
+Project 4: Titanic Shiny App Prompts
+
+Prompt 1 - Initial Shiny App Prompt
+-----------------------------------
+Build a single-file R Shiny app named app.R for my Project4_Titanic_Shiny folder.
+
+Context:
+- I already have Tidymodels code from my midterm assignment for Titanic survival prediction.
+- The project goal is to build a Shiny front end that uses Tidymodels code to train and compare models predicting Titanic passenger survival.
+- Candidate models:
+  1. Null model
+  2. kNN
+  3. Boosted C5.0
+  4. Random Forest
+  5. Regularized Logistic Regression
+  6. Naive Bayes
+- Response variable: Survived
+- Use the titanic training data and compare models using validation performance.
+- Use accuracy as the main model selection metric.
+
+Requirements:
+1. Create a runnable single-file app.R.
+2. Use shiny, tidyverse, and tidymodels.
+3. Organize the app into tabs:
+   - Overview
+   - Data Preparation
+   - Train Models
+   - Model Comparison
+   - Best Model
+   - Predict New Passenger
+4. Add a button so models train only when clicked.
+5. Show:
+   - preprocessing summary
+   - table of model metrics
+   - best model selection
+   - confusion matrix for the best model
+   - ROC plot if possible
+6. Add a small user input form for a new passenger and output the predicted survival class from the best model.
+7. Handle missing values safely.
+8. Make sure Survived is treated as a factor with levels No and Yes.
+9. Keep code readable and well-commented.
+10. Do not depend on external objects already loaded in memory.
+Return complete runnable code only.
+
+
+Prompt 2 - App Fix / Improvement Prompt
+---------------------------------------
+Now improve the Shiny app code:
+- reduce duplication by creating helper functions
+- make the UI cleaner with sidebar controls
+- ensure the app does not retrain all models on startup
+- add validation messages for prediction inputs
+- make the code robust if one model fails
+- keep the app in one file and fully runnable
+
+
+Prompt 3 - Report Generation Prompt
+-----------------------------------
+Create a complete Quarto report file named report.qmd for my Project 4 Titanic Shiny App assignment.
+
+Context:
+- This project uses agentic programming to build a Shiny app front end for Titanic survival prediction.
+- The app compares these models built with tidymodels:
+  1. Null Model
+  2. kNN
+  3. Boosted C5.0
+  4. Random Forest
+  5. Regularized Logistic Regression
+  6. Naive Bayes
+- The response variable is Survived.
+- The app has already been built and tested.
+- Validation results are:
+  RandomForest        accuracy 0.82   roc_auc 0.89
+  LogisticRegression  accuracy 0.82   roc_auc 0.87
+  Boosted_C50         accuracy 0.82   roc_auc 0.87
+  NaiveBayes          accuracy 0.81   roc_auc 0.84
+  kNN                 accuracy 0.80   roc_auc 0.84
+  Null_Model          accuracy 0.61   roc_auc 0.50
+
+- Random Forest was selected as the final best model because it tied for the highest accuracy and had the highest ROC AUC among the top models.
+- The confusion matrix for the selected model on the validation set is:
+  Pred No / True No = 104
+  Pred No / True Yes = 26
+  Pred Yes / True No = 6
+  Pred Yes / True Yes = 43
+
+Requirements:
+1. Write the report in Quarto .qmd format.
+2. Organize the report using the Five Steps of data analysis.
+3. Include a section titled "Use of Agentic Programming Tool".
+4. In that section, explain that Google Antigravity was used to generate the initial Shiny app code from a natural-language prompt, and that the generated code was then reviewed, tested, and corrected.
+5. Include a section discussing which model was best, how that was determined, and the implications of the findings.
+6. Include an appendix section with the exact prompt used.
