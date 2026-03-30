@@ -1,0 +1,183 @@
+2026-03-30 07:58:40.105 [info] [main] Log level: Info
+2026-03-30 07:58:40.105 [info] [main] Validating found git in: "/usr/bin/git"
+2026-03-30 07:58:40.179 [info] [main] Using git "2.39.2 (Apple Git-143)" from "/usr/bin/git"
+2026-03-30 07:58:40.179 [info] [Model][doInitialScan] Initial repository scan started
+2026-03-30 07:58:40.180 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2026-03-30 08:06:04.525 [info] [main] Log level: Info
+2026-03-30 08:06:04.526 [info] [main] Validating found git in: "/usr/bin/git"
+2026-03-30 08:06:04.605 [info] [main] Using git "2.39.2 (Apple Git-143)" from "/usr/bin/git"
+2026-03-30 08:06:04.605 [info] [Model][doInitialScan] Initial repository scan started
+2026-03-30 08:06:04.821 [info] > git rev-parse --show-toplevel [213ms]
+2026-03-30 08:06:04.821 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:06:04.823 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2026-03-30 08:06:04.850 [info] > git rev-parse --show-toplevel [17ms]
+2026-03-30 08:06:04.850 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:06:06.366 [info] > git rev-parse --show-toplevel [24ms]
+2026-03-30 08:06:06.366 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:06:09.309 [info] > git rev-parse --show-toplevel [37ms]
+2026-03-30 08:06:09.310 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:06:09.329 [info] > git rev-parse --show-toplevel [19ms]
+2026-03-30 08:06:09.329 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:06:10.333 [info] [main] Log level: Info
+2026-03-30 08:06:10.338 [info] [main] Validating found git in: "/usr/bin/git"
+2026-03-30 08:06:10.371 [info] [main] Using git "2.39.2 (Apple Git-143)" from "/usr/bin/git"
+2026-03-30 08:06:10.371 [info] [Model][doInitialScan] Initial repository scan started
+2026-03-30 08:06:10.573 [info] > git rev-parse --show-toplevel [197ms]
+2026-03-30 08:06:10.573 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:06:10.574 [info] [Model][doInitialScan] Initial repository scan completed - repositories (0), closed repositories (0), parent repositories (0), unsafe repositories (0)
+2026-03-30 08:06:10.608 [info] > git rev-parse --show-toplevel [23ms]
+2026-03-30 08:06:10.608 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:06:10.933 [info] > git rev-parse --show-toplevel [15ms]
+2026-03-30 08:06:10.933 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:06:12.474 [info] > git rev-parse --show-toplevel [61ms]
+2026-03-30 08:06:12.474 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:16:58.371 [info] > git rev-parse --show-toplevel [62ms]
+2026-03-30 08:16:58.371 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:18:14.966 [info] > git rev-parse --show-toplevel [54ms]
+2026-03-30 08:18:14.967 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:18:14.982 [info] > git rev-parse --show-toplevel [15ms]
+2026-03-30 08:18:14.982 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:18:15.002 [info] > git rev-parse --show-toplevel [20ms]
+2026-03-30 08:18:15.003 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 08:18:45.717 [info] > git rev-parse --show-toplevel [36ms]
+2026-03-30 08:18:45.717 [info] fatal: not a git repository (or any of the parent directories): .git
+2026-03-30 11:28:33.110 [info] > git init -b main [133ms]
+2026-03-30 11:28:33.124 [info] > git rev-parse --show-toplevel [12ms]
+2026-03-30 11:28:33.205 [info] > git rev-parse --git-dir --git-common-dir --show-superproject-working-tree [79ms]
+2026-03-30 11:28:33.222 [info] [Model][openRepository] Opened repository (path): /Users/ashishsharma/Desktop/Project4_Titanic_Shiny
+2026-03-30 11:28:33.222 [info] [Model][openRepository] Opened repository (real path): /Users/ashishsharma/Desktop/Project4_Titanic_Shiny
+2026-03-30 11:28:33.222 [info] [Model][openRepository] Opened repository (kind): repository
+2026-03-30 11:28:33.231 [info] [Git][getRemotes] No remotes found in the git config file
+2026-03-30 11:28:33.249 [info] > git config --get commit.template [21ms]
+2026-03-30 11:28:33.250 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [20ms]
+2026-03-30 11:28:33.250 [warning] [Git][getBranch] No such branch: main
+2026-03-30 11:28:33.278 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [27ms]
+2026-03-30 11:28:33.280 [info] > git status -z -uall [30ms]
+2026-03-30 11:28:33.285 [info] [Git][getRemotes] No remotes found in the git config file
+2026-03-30 11:28:33.298 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [15ms]
+2026-03-30 11:28:33.298 [warning] [Git][getBranch] No such branch: main
+2026-03-30 11:28:33.298 [error] [GitHistoryProvider][resolveHEADMergeBase] Failed to resolve merge base for main: Error: No such branch: main.
+2026-03-30 11:28:33.299 [info] > git config --get commit.template [14ms]
+2026-03-30 11:28:33.300 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [15ms]
+2026-03-30 11:28:33.300 [warning] [Git][getBranch] No such branch: main
+2026-03-30 11:28:33.324 [info] > git status -z -uall [24ms]
+2026-03-30 11:28:33.324 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [24ms]
+2026-03-30 11:28:33.326 [info] > git add -A -- . [101ms]
+2026-03-30 11:28:33.363 [info] > git -c user.useConfigOnly=true commit --quiet --allow-empty-message --file - --allow-empty-message [37ms]
+2026-03-30 11:28:33.376 [info] > git config --get commit.template [12ms]
+2026-03-30 11:28:33.377 [info] [Git][getRemotes] No remotes found in the git config file
+2026-03-30 11:28:33.391 [info] > git config --get commit.template [14ms]
+2026-03-30 11:28:33.392 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [15ms]
+2026-03-30 11:28:33.410 [info] > git status -z -uall [17ms]
+2026-03-30 11:28:33.410 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [17ms]
+2026-03-30 11:28:33.436 [info] > git log --format=%H%n%aN%n%aE%n%at%n%ct%n%P%n%D%n%B -z --shortstat --diff-merges=first-parent -n50 --skip=0 --topo-order --decorate=full --stdin [46ms]
+2026-03-30 11:28:33.497 [info] > git show -s --decorate=full --shortstat --format=%H%n%aN%n%aE%n%at%n%ct%n%P%n%D%n%B -z ab60ef91fd641994f4e76e07b20439f747c2380a -- [84ms]
+2026-03-30 11:28:33.529 [info] [Git][getRemotes] No remotes found in the git config file
+2026-03-30 11:28:33.564 [info] > git config --get commit.template [35ms]
+2026-03-30 11:28:33.564 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [35ms]
+2026-03-30 11:28:33.582 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [17ms]
+2026-03-30 11:28:33.582 [info] > git status -z -uall [17ms]
+2026-03-30 11:28:33.597 [info] > git remote add origin https://github.com/ashishfreaksout/Project4_Titanic_Shiny.git [13ms]
+2026-03-30 11:28:33.660 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [62ms]
+2026-03-30 11:28:33.660 [info] > git config --get commit.template [63ms]
+2026-03-30 11:28:33.689 [info] > git status -z -uall [28ms]
+2026-03-30 11:28:33.690 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [28ms]
+2026-03-30 11:28:33.768 [info] > git ls-files --stage -- app.R [15ms]
+2026-03-30 11:28:33.769 [info] > git show --textconv :app.R [17ms]
+2026-03-30 11:28:33.782 [info] > git cat-file -s a27c46fdf35d6b081bf85e9481c7bf80a3b48385 [14ms]
+2026-03-30 11:28:33.841 [info] > git blame --root --incremental ab60ef91fd641994f4e76e07b20439f747c2380a -- app.R [14ms]
+2026-03-30 11:28:33.977 [info] > git check-ignore -v -z --stdin [17ms]
+2026-03-30 11:28:34.881 [info] > git ls-files --stage -- app.R [30ms]
+2026-03-30 11:28:34.898 [info] > git cat-file -s a27c46fdf35d6b081bf85e9481c7bf80a3b48385 [17ms]
+2026-03-30 11:28:34.913 [info] > git show --textconv :app.R [14ms]
+2026-03-30 11:28:41.628 [info] > git push -u origin main [7937ms]
+2026-03-30 11:28:41.628 [info] error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+2026-03-30 11:28:41.646 [info] > git config --get commit.template [16ms]
+2026-03-30 11:28:41.646 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [16ms]
+2026-03-30 11:28:41.660 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [12ms]
+2026-03-30 11:28:41.661 [info] > git status -z -uall [14ms]
+2026-03-30 11:29:31.807 [info] > git push -u origin main [1045ms]
+2026-03-30 11:29:31.808 [info] error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+2026-03-30 11:29:31.837 [info] > git config --get commit.template [24ms]
+2026-03-30 11:29:31.838 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [24ms]
+2026-03-30 11:29:31.855 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [16ms]
+2026-03-30 11:29:31.857 [info] > git status -z -uall [18ms]
+2026-03-30 11:29:41.579 [info] > git hash-object -t tree /dev/null [35ms]
+2026-03-30 11:29:41.601 [info] > git diff-tree -r --name-status -z --diff-filter=ADMR --find-renames=50% 4b825dc642cb6eb9a060e54bf8d69288fbee4904 ab60ef91fd641994f4e76e07b20439f747c2380a -- [19ms]
+2026-03-30 11:29:42.163 [info] > git check-ignore -v -z --stdin [34ms]
+2026-03-30 11:29:43.594 [info] > git check-ignore -v -z --stdin [26ms]
+2026-03-30 11:32:16.263 [info] > git push -u origin main [1157ms]
+2026-03-30 11:32:16.263 [info] error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+2026-03-30 11:32:16.293 [info] > git config --get commit.template [25ms]
+2026-03-30 11:32:16.294 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [24ms]
+2026-03-30 11:32:16.311 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [15ms]
+2026-03-30 11:32:16.314 [info] > git status -z -uall [19ms]
+2026-03-30 11:32:31.214 [info] > git check-ignore -v -z --stdin [131ms]
+2026-03-30 11:32:31.257 [info] > git check-ignore -v -z --stdin [32ms]
+2026-03-30 11:32:31.310 [info] > git ls-files --stage -- README.md [24ms]
+2026-03-30 11:32:31.312 [info] > git show --textconv :README.md [29ms]
+2026-03-30 11:32:31.329 [info] > git cat-file -s f1add0819e9fe8781bcabe630a539c45d0019bf6 [17ms]
+2026-03-30 11:32:31.685 [info] > git check-ignore -v -z --stdin [18ms]
+2026-03-30 11:32:31.711 [info] > git check-ignore -v -z --stdin [14ms]
+2026-03-30 11:32:31.889 [info] > git ls-files --stage -- report.qmd [18ms]
+2026-03-30 11:32:31.890 [info] > git show --textconv :report.qmd [20ms]
+2026-03-30 11:32:31.905 [info] > git cat-file -s 12f001dedabf52f8a4cf80836e651c09e1af1449 [15ms]
+2026-03-30 11:32:36.926 [info] > git check-ignore -v -z --stdin [25ms]
+2026-03-30 11:32:36.957 [info] > git check-ignore -v -z --stdin [16ms]
+2026-03-30 11:32:37.118 [info] > git ls-files --stage -- app.R [19ms]
+2026-03-30 11:32:37.120 [info] > git show --textconv :app.R [21ms]
+2026-03-30 11:32:37.134 [info] > git cat-file -s a27c46fdf35d6b081bf85e9481c7bf80a3b48385 [15ms]
+2026-03-30 11:32:38.942 [info] > git check-ignore -v -z --stdin [27ms]
+2026-03-30 11:32:47.874 [info] > git log --format=%H%n%aN%n%aE%n%at%n%ct%n%P%n%D%n%B -z --shortstat --diff-merges=first-parent -n50 --skip=0 --topo-order --decorate=full --stdin [39ms]
+2026-03-30 11:32:48.703 [info] > git diff-tree -r --name-status -z --diff-filter=ADMR --find-renames=50% 4b825dc642cb6eb9a060e54bf8d69288fbee4904 ab60ef91fd641994f4e76e07b20439f747c2380a -- [26ms]
+2026-03-30 11:33:02.108 [info] > git push -u origin main [1069ms]
+2026-03-30 11:33:02.109 [info] error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+2026-03-30 11:33:02.140 [info] > git config --get commit.template [27ms]
+2026-03-30 11:33:02.140 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [25ms]
+2026-03-30 11:33:02.161 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [19ms]
+2026-03-30 11:33:02.162 [info] > git status -z -uall [21ms]
+2026-03-30 11:33:51.442 [info] > git push -u origin main [1194ms]
+2026-03-30 11:33:51.442 [info] error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+2026-03-30 11:33:51.474 [info] > git config --get commit.template [28ms]
+2026-03-30 11:33:51.475 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [27ms]
+2026-03-30 11:33:51.493 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [17ms]
+2026-03-30 11:33:51.496 [info] > git status -z -uall [21ms]
+2026-03-30 11:37:00.181 [info] > git add -A -- . [73ms]
+2026-03-30 11:37:00.212 [info] > git -c user.useConfigOnly=true commit --quiet --allow-empty-message --file - --allow-empty [31ms]
+2026-03-30 11:37:00.224 [info] > git config --get commit.template [12ms]
+2026-03-30 11:37:00.243 [info] > git config --get commit.template [17ms]
+2026-03-30 11:37:00.246 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [20ms]
+2026-03-30 11:37:00.288 [info] > git status -z -uall [41ms]
+2026-03-30 11:37:00.289 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [41ms]
+2026-03-30 11:37:00.315 [info] > git show -s --decorate=full --shortstat --format=%H%n%aN%n%aE%n%at%n%ct%n%P%n%D%n%B -z 8cedda46c27ba0e632b6dc25f68b6037aeb53ca1 -- [24ms]
+2026-03-30 11:37:00.326 [info] > git config --get commit.template [17ms]
+2026-03-30 11:37:00.327 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [18ms]
+2026-03-30 11:37:00.339 [info] > git log --format=%H%n%aN%n%aE%n%at%n%ct%n%P%n%D%n%B -z --shortstat --diff-merges=first-parent -n50 --skip=0 --topo-order --decorate=full --stdin [41ms]
+2026-03-30 11:37:00.347 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [19ms]
+2026-03-30 11:37:00.348 [info] > git status -z -uall [21ms]
+2026-03-30 11:37:01.455 [info] > git diff-tree -r --name-status -z --diff-filter=ADMR --find-renames=50% 4b825dc642cb6eb9a060e54bf8d69288fbee4904 ab60ef91fd641994f4e76e07b20439f747c2380a -- [15ms]
+2026-03-30 11:37:10.452 [info] > git diff --name-status -z --diff-filter=ADMR --find-renames=50% ab60ef91fd641994f4e76e07b20439f747c2380a...8cedda46c27ba0e632b6dc25f68b6037aeb53ca1 -- [30ms]
+2026-03-30 11:37:16.915 [info] > git push -u origin main [991ms]
+2026-03-30 11:37:16.916 [info] error: RPC failed; HTTP 400 curl 22 The requested URL returned error: 400
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+2026-03-30 11:37:16.942 [info] > git config --get commit.template [24ms]
+2026-03-30 11:37:16.943 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) --ignore-case refs/heads/main refs/remotes/main [24ms]
+2026-03-30 11:37:16.961 [info] > git for-each-ref --sort -committerdate --format %(refname)%00%(objectname)%00%(*objectname) [17ms]
+2026-03-30 11:37:16.961 [info] > git status -z -uall [18ms]

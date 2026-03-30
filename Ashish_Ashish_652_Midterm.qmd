@@ -1,0 +1,495 @@
+---
+title: "Statistics 652 - Midterm"
+author: "Ashish Ashish"
+date: today
+format: 
+  html:
+    embed-resources: true
+---
+
+# Midterm
+
+### Question 1
+
+Clearly state the 5 steps for applying Machine Learning to a problem.
+
+### **Answer:**
+
+- Step 1:Define the problem and identify the response variable and potential predictors. Split the data into training and testing sets.
+
+- Step 2:Perform exploratory data analysis and preprocess the training data such as handle missing values, create variables, scale predictors if needed.
+
+- Step 3:Fit one or more candidate models using only the training data.
+
+- Step 4:Evaluate and tune the models using the training data (e.g., cross-validation, accuracy, AUC, RMSE) and select the best-performing model.
+
+- Step 5:Use the final trained model to make predictions on the testing data (which does not include the response variable) for final evaluation or submission.
+
+### Question 2
+
+For the [titanic](https://www.kaggle.com/c/titanic/data) data set try the following machine learning classification algorithms.
+
+Use the training and test datasets from the **titanic** R package.
+
+You should note that the *titanic_train* has the *Survived* variable and the *titanic_test* does not.  So to select your best model you need to use the *titanic_train* dataset to train and test your models.  So that means you will need to select a training dataset from *titanic_train* and select a testing dataset (this would be a validation dataset) from *titanic_train* to evaluate the models you try.
+
+I have not demonstrated the use of cross-validation, once you are comfortable running all of the models see if you can figure out how to use cross-validation to pick the best model.
+
+Once you have picked the best model you should do the following:
+
+1. Re-run your chosen model on the full *titanic_train* dataset.
+2. Then produce predictions for the *titanic_test* dataset.  This is what you would submit in a .csv to [Kaggle](https://www.kaggle.com/) in a competition.
+
+Build **classification models** for the *Survived* variable. Pick an appropriate model scoring function, i.e. metric, and determine which model is the best. I would suggest making a confusion matrix and computing the accuracy or kappa. 
+
+0. Null Model
+1. kNN (the sample code given did not scale or normalize, if you use this model you need to do that.)
+2. Boosted C5.0 
+3. Random Forest
+4. Logistic Regression using regularization
+5. Naive Bayes
+
+Extra Credit:
+
+Make one plot containing all of the ROC curves for the algorithms trained.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+
+# Data
+```{r}
+library(pacman)
+p_load(titanic, tidyverse, janitor, naniar, DataExplorer, tidymodels,kknn,C50,xgboost,ranger,glmnet,agua,klaR,yardstick,parsnip)
+```
+## Loading
+
+```{r}
+data(titanic_train)
+data(titanic_test)
+head(titanic_train)
+head(titanic_test)
+```
+
+## Exploration
+
+```{r}
+library(naniar)
+naniar::gg_miss_var(titanic_train)
+naniar::gg_miss_var(titanic_test)
+```
+
+## Prep
+
+```{r}
+titanic_train <- titanic_train |>
+  mutate(
+    Survived = case_when(
+      Survived %in% c(1, "1", "Yes", "yes") ~ "Yes",
+      Survived %in% c(0, "0", "No",  "no")  ~ "No",
+      TRUE ~ NA_character_
+    ),
+    Survived = factor(Survived, levels = c("No", "Yes")),
+    Sex = as.factor(Sex),
+    Embarked = as.factor(Embarked),
+    Pclass = as.factor(Pclass),
+    SibSp = as.double(SibSp),
+    Parch = as.double(Parch)
+  )
+
+titanic_test <- titanic_test |>
+    mutate(
+        # Survived = factor(Survived, levels = c("0", "1"), labels = c("No", "Yes")),
+        Sex = as.factor(Sex),
+        Embarked = as.factor(Embarked),
+        Pclass = as.factor(Pclass),
+        SibSp = as.double(SibSp),
+        Parch = as.double(Parch)
+    )
+
+head(titanic_train)
+```
+
+
+```{r}
+# Training/validation split.
+set.seed(108)
+parts <- titanic_train |> initial_split(prop = 0.8, strata = Survived)
+train <- parts |> training()
+val <- parts |> testing()
+```
+
+```{r}
+train <- train |> mutate(Survived = factor(Survived, levels = c("No","Yes")))
+val   <- val   |> mutate(Survived = factor(Survived, levels = c("No","Yes")))
+```
+
+
+```{r}
+rec <- recipe(Survived ~ ., data = train) |>
+  update_role(PassengerId, Name, Ticket, Cabin, new_role = "id") |>
+  step_rm(has_role("id")) |>
+  step_impute_mean(all_numeric_predictors()) |>
+  step_impute_mode(all_nominal_predictors()) |>
+  step_novel(all_nominal_predictors()) |>
+  step_zv(all_predictors())
+
+preprocess <- rec
+
+```
+
+
+# Model 0 Null Model
+
+### **Answer:**
+
+The null model just predicts not survived, and has a validation accuracy of 61.5%.
+
+```{r,warning=FALSE}
+model_null <- null_model() |>
+    set_engine("parsnip") |>
+    set_mode("classification")
+
+fit_null <- workflow() |>
+    add_formula(Survived ~ .) |>
+    add_model(model_null) |>
+    last_fit(parts)
+
+fit_null |> collect_metrics()
+
+fit_null |> collect_predictions() |> conf_mat(truth = Survived, estimate = .pred_class)
+```
+
+
+# Model 1 kNN
+
+### **Answer:**
+
+or k nearest neighbors, after doing a grid search of k = 1 to 10 along with 10-fold cross validation, the optimal k value was found to be 7, yielding an accuracy of 78.7%.
+
+The k nearest neighbors model found k = 8 to be the optimal v
+
+
+```{r,warning=FALSE}
+model_knn <- nearest_neighbor(neighbors = tune()) |>
+    set_engine("kknn") |>
+    set_mode("classification")
+
+workflow_knn <- workflow() |>
+    add_recipe(preprocess) |>
+    add_model(model_knn)
+
+fit_knn <- workflow_knn |>
+    tune_grid(
+        resamples = vfold_cv(train, v = 10, strata = Survived),
+        grid = expand_grid(neighbors = 1:10),
+        control = control_grid(save_pred = T)
+    )
+
+best_knn <- fit_knn |> select_best(metric = "accuracy")
+best_knn
+
+workflow_knn_final <- workflow_knn |> finalize_workflow(best_knn)
+
+fit_knn_final <- workflow_knn_final |> last_fit(parts)
+
+fit_knn_final |> collect_metrics()
+
+fit_knn_final |>
+    collect_predictions() |>
+    conf_mat(truth = Survived, estimate = .pred_class)
+```
+
+# Model 2: Boosted C5.0
+
+### **Answer:**
+
+The Boosted C5.0 model obtained an accuracy of 79.8%.
+
+
+```{r,warning=FALSE}
+# Create a recipe just for C5.0
+rec_c50 <- recipe(Survived ~ ., data = train) |>
+  # Hard removal of ID columns prevents the C5.0 crash
+  step_rm(PassengerId, Name, Ticket, Cabin) |>
+  step_impute_mean(all_numeric_predictors()) |>
+  step_impute_mode(all_nominal_predictors()) |>
+  # Dummy variables ensure the C5.0 engine receives clean data
+  step_dummy(all_nominal_predictors()) |>
+  step_zv(all_predictors())
+
+model_c50 <- boost_tree(trees = tune()) |>
+    set_engine("C5.0") |>
+    set_mode("classification")
+
+workflow_c50 <- workflow() |>
+    add_recipe(rec_c50) |> 
+    add_model(model_c50)
+
+
+fit_c50_tuned <- workflow_c50 |>
+    tune_grid(
+        resamples = vfold_cv(train, v = 10, strata = Survived),
+        grid = expand_grid(trees = c(1, 10, 20, 30, 50)),
+        control = control_grid(save_pred = TRUE)
+    )
+
+best_c50 <- fit_c50_tuned |> 
+  select_best(metric = "accuracy")
+
+
+workflow_c50_final <- workflow_c50 |> finalize_workflow(best_c50)
+
+
+# This runs the 10-tree model on your training data and tests it
+fit_c50_final <- workflow_c50_final |> last_fit(parts)
+
+
+# This will show Accuracy and ROC AUC
+fit_c50_final |> collect_metrics()
+
+#  Confusion Matrix Table 
+fit_c50_final |>
+    collect_predictions() |>
+    conf_mat(truth = Survived, estimate = .pred_class)
+```
+
+
+
+# Model 3: Random Forest
+
+
+### **Answer:**
+
+The random forest model has an accuracy of 81%.
+
+```{r,warning=FALSE}
+model_rf <- rand_forest(mtry = tune(), trees = tune(), min_n = tune()) |>
+    set_engine("randomForest") |>
+    set_mode("classification")
+
+workflow_rf <- workflow() |>
+    add_recipe(rec) |>
+    add_model(model_rf)
+
+fit_rf <- workflow_rf |>
+    tune_grid(
+        resamples = vfold_cv(train, v = 10, strata = Survived),
+        grid = grid_latin_hypercube(
+            mtry(range = c(1, 7)),
+            trees(), min_n(),
+            size = 10
+        ),
+        control = control_grid(save_pred = T)
+    )
+
+best_rf <- fit_rf |> select_best(metric = "accuracy")
+best_rf
+
+workflow_rf_final <- workflow_rf |> finalize_workflow(best_rf)
+
+fit_rf_final <- workflow_rf_final |> last_fit(parts)
+
+fit_rf_final |> collect_metrics()
+
+fit_rf_final |>
+    collect_predictions() |>
+    conf_mat(truth = Survived, estimate = .pred_class)
+```
+
+
+
+# Model 4 Logistic Regression using regularization
+
+### **Answer:**
+
+
+The logistic regression model obtained an accuracy of 77.6%.
+
+```{r,warning=FALSE}
+model_lr <- logistic_reg(penalty = tune(), mixture = tune()) |>
+    set_engine("glmnet") |>
+    set_mode("classification")
+
+# Extra preprocessing since logistic regression only works with numeric or dummy
+# variables.
+preprocess_lr <- rec |>
+    step_dummy(Pclass, Sex, Embarked) 
+
+workflow_lr <- workflow() |>
+    add_recipe(preprocess_lr) |>
+    add_model(model_lr)
+
+fit_lr <- workflow_lr |>
+    tune_grid(
+        resamples = vfold_cv(train, v = 10, strata = Survived),
+        grid = grid_latin_hypercube(penalty(), mixture(), size = 10),
+        control = control_grid(save_pred = T)
+    )
+
+best_lr <- fit_lr |> select_best(metric = "accuracy")
+best_lr
+
+workflow_lr_final <- workflow_lr |> finalize_workflow(best_lr)
+
+fit_lr_final <- workflow_lr_final |> last_fit(parts)
+
+fit_lr_final |> collect_metrics()
+
+fit_lr_final |>
+    collect_predictions() |>
+    conf_mat(truth = Survived, estimate = .pred_class)
+```
+
+
+# Model 5 Naive Bayes
+
+### **Answer:**
+
+The Naive Bayes model obtained an accuracy of 78.2%.
+
+```{r,warning=FALSE}
+# Required for Naive Bayes implementation.
+library(agua)
+library(discrim)
+
+model_nb <- naive_Bayes(smoothness = tune(), Laplace = tune()) |>
+    set_engine("klaR") |>
+    set_mode("classification")
+
+workflow_nb <- workflow() |>
+    add_recipe(preprocess) |>
+    add_model(model_nb)
+
+fit_nb <- workflow_nb |>
+    tune_grid(
+        resamples = vfold_cv(train, v = 10, strata = Survived),
+        grid = grid_latin_hypercube(smoothness(), Laplace(), size = 10),
+        control = control_grid(save_pred = T)
+    )
+
+best_nb <- fit_nb |> select_best(metric = "accuracy")
+best_nb
+
+workflow_nb_final <- workflow_nb |> finalize_workflow(best_nb)
+
+fit_nb_final <- workflow_nb_final |> last_fit(parts)
+
+fit_nb_final |> collect_metrics()
+
+fit_nb_final |>
+    collect_predictions() |>
+    conf_mat(truth = Survived, estimate = .pred_class)
+```
+
+
+# Final
+
+The model with the highest accuracy (81%) was the random forest model, so that will be used to fit on the entire training set.
+
+**There is an error in the next code chunk.  Needs to be updated.**
+```{r}
+levels(titanic_train$Survived)
+```
+
+```{r}
+# Finalize RF model with best parameters
+model_final <- model_rf |> finalize_model(best_rf)
+
+workflow_final <- workflow() |>
+  add_recipe(preprocess) |>
+  add_model(model_final)
+
+# Fit on full training data
+fit_final <- workflow_final |> fit(data = titanic_train)
+
+# Predict on test data (NO bake needed)
+pred_final <- fit_final |> predict(new_data = titanic_test)
+
+# Kaggle submission format (Yes/No -> 1/0)
+submission_rf <- titanic_test |>
+  dplyr::select(PassengerId) |>
+  mutate(Survived = ifelse(pred_final$.pred_class == "Yes", 1, 0))
+
+head(submission_rf,20)
+```
+
+```{r}
+val_yesno <- val |>
+  mutate(
+    Survived = as.character(Survived),
+    Survived = ifelse(Survived == "Yes", "Yes", "No"),
+    Survived = factor(Survived, levels = c("No","Yes"))
+  )
+
+val_01 <- val |>
+  mutate(
+    Survived = as.character(Survived),
+    Survived = ifelse(Survived == "Yes", "1", "0"),
+    Survived = factor(Survived, levels = c("0","1"))
+  )
+
+# MUST show both 0 and 1
+table(val_yesno$Survived)
+table(val_01$Survived)
+```
+```{r}
+# val already has No/Yes; create matching 0/1 truth for the other models
+val_01 <- val |>
+  mutate(
+    Survived = ifelse(Survived == "Yes", "1", "0"),
+    Survived = factor(Survived, levels = c("0","1"))
+  )
+
+roc_data <- bind_rows(
+  # Null
+  extract_workflow(fit_null) |>
+    predict(val_01, type = "prob") |>
+    bind_cols(val_01) |>
+    roc_curve(truth = Survived, .pred_Yes, event_level = "second") |>
+    mutate(model = "Null"),
+
+  # kNN
+  extract_workflow(fit_knn_final) |>
+    predict(val_01, type = "prob") |>
+    bind_cols(val_01) |>
+    roc_curve(truth = Survived, .pred_Yes, event_level = "second") |>
+    mutate(model = "kNN"),
+
+  # Random Forest
+  extract_workflow(fit_rf_final) |>
+    predict(val_01, type = "prob") |>
+    bind_cols(val_01) |>
+    roc_curve(truth = Survived, .pred_Yes, event_level = "second") |>
+    mutate(model = "Random Forest"),
+
+  # Logistic Regression
+  extract_workflow(fit_lr_final) |>
+    predict(val_01, type = "prob") |>
+    bind_cols(val_01) |>
+    roc_curve(truth = Survived, .pred_Yes, event_level = "second") |>
+    mutate(model = "Logistic Regression"),
+
+  # Naive Bayes
+  extract_workflow(fit_nb_final) |>
+    predict(val_01, type = "prob") |>
+    bind_cols(val_01) |>
+    roc_curve(truth = Survived, .pred_Yes, event_level = "second") |>
+    mutate(model = "Naive Bayes"),
+
+  # Boosted C5.0
+  extract_workflow(fit_c50_final) |>
+    predict(val, type = "prob") |>
+    bind_cols(val) |>
+    roc_curve(truth = Survived, .pred_Yes, event_level = "second") |>
+    mutate(model = "Boosted C5.0")
+)
+```
+```{r}
+ggplot(roc_data, aes(x = 1 - specificity, y = sensitivity, color = model)) +
+  geom_path(linewidth = 1.1) +
+  geom_abline(lty = 3) +
+  coord_equal() +
+  theme_minimal()
+```
+
